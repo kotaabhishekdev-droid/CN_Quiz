@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Computer Networks one-mark multiple-choice practice quiz." />
+  <title>Computer Networks | 1-Mark MCQ Quiz</title>
+  <style>
+    :root {
+      --bg: #f4f6fb;
+      --card: #ffffff;
+      --ink: #172033;
+      --muted: #68738a;
+      --line: #e3e8f1;
+      --accent: #3157d5;
+      --accent-soft: #edf1ff;
+      --good: #16834a;
+      --good-bg: #eaf7ef;
+      --bad: #c0393b;
+      --bad-bg: #fff0f0;
+      --shadow: 0 12px 35px rgba(27, 39, 70, .08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+    }
+    .topbar {
+      background: #172554;
+      color: white;
+      padding: 22px 18px;
+    }
+    .topbar-inner, main { max-width: 920px; margin: 0 auto; }
+    .eyebrow { margin: 0 0 5px; color: #c7d2fe; font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    h1 { margin: 0; font-size: clamp(1.45rem, 4vw, 2rem); }
+    .subtitle { margin: 6px 0 0; color: #dbe4ff; }
+    main { padding: 24px 16px 48px; }
+    .panel, .question-card, .result-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+    }
+    .panel { padding: 18px; margin-bottom: 18px; }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .stat { background: #f8f9fd; border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; }
+    .stat strong { display: block; font-size: 1.1rem; }
+    .stat span { color: var(--muted); font-size: .78rem; }
+    .toolbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
+    .progress-track { height: 8px; background: #e9edf6; border-radius: 99px; overflow: hidden; flex: 1; min-width: 130px; }
+    .progress-fill { height: 100%; width: 0%; background: var(--accent); transition: width .2s ease; }
+    .progress-label { color: var(--muted); font-size: .88rem; white-space: nowrap; }
+    .question-card { padding: 20px; margin-bottom: 14px; }
+    .q-meta { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .q-number { color: var(--accent); font-size: .82rem; font-weight: 700; }
+    .mark { background: var(--accent-soft); color: var(--accent); border-radius: 99px; padding: 4px 10px; font-size: .76rem; font-weight: 700; }
+    .question-card h2 { font-size: 1.08rem; line-height: 1.45; margin: 0 0 15px; }
+    .options { display: grid; gap: 9px; }
+    .option { display: flex; align-items: flex-start; gap: 10px; border: 1px solid var(--line); border-radius: 11px; padding: 11px 12px; cursor: pointer; transition: .15s ease; }
+    .option:hover { border-color: #aab8f2; background: #fafbff; }
+    .option input { margin-top: 4px; accent-color: var(--accent); }
+    .option:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }
+    .option.correct { border-color: var(--good); background: var(--good-bg); }
+    .option.wrong { border-color: var(--bad); background: var(--bad-bg); }
+    .option input:disabled { cursor: default; }
+    .feedback { display: none; margin-top: 11px; padding: 10px 12px; border-radius: 10px; font-size: .9rem; }
+    .feedback.show { display: block; }
+    .feedback.good { background: var(--good-bg); color: #11683b; }
+    .feedback.bad { background: var(--bad-bg); color: #a52b2d; }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+    button { border: 0; border-radius: 10px; padding: 12px 18px; font-weight: 700; font-size: .95rem; cursor: pointer; }
+    button:disabled { opacity: .5; cursor: not-allowed; }
+    .primary { color: white; background: var(--accent); }
+    .secondary { color: #26324b; background: #e9edf5; }
+    .result-card { display: none; padding: 24px; text-align: center; margin-top: 18px; }
+    .result-card.show { display: block; }
+    .score { font-size: clamp(2.5rem, 8vw, 4rem); color: var(--accent); font-weight: 800; line-height: 1.1; margin: 10px 0; }
+    .result-note { color: var(--muted); }
+    .review-list { text-align: left; margin-top: 20px; }
+    .review-item { padding: 12px 0; border-top: 1px solid var(--line); }
+    .review-item strong { display: block; margin-bottom: 4px; }
+    .hidden { display: none !important; }
+    footer { text-align: center; color: var(--muted); font-size: .8rem; padding: 10px 16px 28px; }
+    @media (max-width: 560px) {
+      .stats { grid-template-columns: 1fr 1fr; }
+      .stat:last-child { grid-column: 1 / -1; }
+      .question-card { padding: 16px; }
+      .toolbar { align-items: stretch; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <p class="eyebrow">Exam Practice • Units 3, 4 &amp; 5</p>
+      <h1>Computer Networks — 1-Mark MCQ Quiz</h1>
+      <p class="subtitle">100 questions · 1 mark each · Select one answer per question</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="panel" aria-label="Quiz progress">
+      <div class="stats">
+        <div class="stat"><strong>100</strong><span>Total questions</span></div>
+        <div class="stat"><strong>1 mark</strong><span>Each question</span></div>
+        <div class="stat"><strong id="answeredCount">0 / 100</strong><span>Answered</span></div>
+      </div>
+      <div class="toolbar">
+        <div class="progress-track" aria-label="Answer progress"><div class="progress-fill" id="progressFill"></div></div>
+        <span class="progress-label" id="progressText">0% completed</span>
+      </div>
+    </section>
+
+    <form id="quizForm">
+      <div id="questions"></div>
+      <div class="actions" id="quizActions">
+        <button class="primary" type="submit" id="submitBtn">Submit Quiz</button>
+        <button class="secondary" type="button" id="resetBtn">Reset Quiz</button>
+      </div>
+    </form>
+
+    <section class="result-card" id="resultCard" aria-live="polite">
+      <p class="eyebrow" style="color:var(--accent)">Quiz completed</p>
+      <h2>Your Score</h2>
+      <div class="score" id="scoreText">0 / 100</div>
+      <p class="result-note" id="resultNote"></p>
+      <div class="actions" style="justify-content:center">
+        <button class="primary" type="button" id="retryBtn">Try Again</button>
+        <button class="secondary" type="button" id="reviewBtn">Review Answers</button>
+      </div>
+      <div class="review-list hidden" id="reviewList"></div>
+    </section>
+  </main>
+
+  <footer>Computer Networks • Units 3, 4 & 5 • 100 marks total • Each correct answer carries 1 mark</footer>
+
+  <script>
+    const quizData = [
+      {
+            "q": "Which layer of the TCP/IP model is responsible for process-to-process delivery?",
+            "o": [
+                  "Network layer",
+                  "Transport layer",
+                  "Data Link layer",
+                  "Physical layer"
+            ],
+            "a": 1,
+            "e": "The Transport layer provides process-to-process delivery using port numbers."
+      },
+      {
+            "q": "Which protocol provides reliable, connection-oriented data transmission?",
+            "o": [
+                  "UDP",
+                  "IP",
+                  "TCP",
+                  "ICMP"
+            ],
+            "a": 2,
+            "e": "TCP provides reliable, connection-oriented byte-stream delivery."
+      },
+      {
+            "q": "How many steps are used in the normal TCP connection establishment handshake?",
+            "o": [
+                  "Two",
+                  "Three",
+                  "Four",
+                  "Five"
+            ],
+            "a": 1,
+            "e": "TCP connection establishment normally uses SYN, SYN-ACK and ACK."
+      },
+      {
+            "q": "Which TCP mechanism allows multiple bytes to be sent before acknowledgements arrive?",
+            "o": [
+                  "Sliding window",
+                  "Address resolution",
+                  "Fragmentation",
+                  "Encapsulation"
+            ],
+            "a": 0,
+            "e": "The sliding-window mechanism permits transmission of data within the sender's allowed window."
+      },
+      {
+            "q": "The TCP receive window (rwnd) is mainly used for which purpose?",
+            "o": [
+                  "Routing",
+                  "Flow control",
+                  "Name resolution",
+                  "Error reporting"
+            ],
+            "a": 1,
+            "e": "The receiver advertises rwnd to prevent the sender from overflowing its receive buffer."
+      },
+      {
+            "q": "Which TCP variable represents the sender's estimate of the network capacity?",
+            "o": [
+                  "TTL",
+                  "rwnd",
+                  "cwnd",
+                  "MSS"
+            ],
+            "a": 2,
+            "e": "The congestion window (cwnd) limits data in flight according to perceived network congestion."
+      },
+      {
+            "q": "Which transport protocol has an 8-byte header?",
+            "o": [
+                  "TCP",
+                  "UDP",
+                  "SCTP",
+                  "HTTP"
+            ],
+            "a": 1,
+            "e": "UDP has four 16-bit header fields, giving a total header size of 8 bytes."
+      },
+      {
+            "q": "Which protocol is commonly used to carry real-time audio and video packets?",
+            "o": [
+                  "RTP",
+                  "ARP",
+                  "RARP",
+                  "FTP"
+            ],
+            "a": 0,
+            "e": "RTP carries real-time media and includes sequence numbers and timestamps."
+      },
+      {
+            "q": "What is the size of an IPv4 address?",
+            "o": [
+                  "16 bits",
+                  "32 bits",
+                  "64 bits",
+                  "128 bits"
+            ],
+            "a": 1,
+            "e": "IPv4 addresses are 32 bits long."
+      },
+      {
+            "q": "What is the size of an IPv6 address?",
+            "o": [
+                  "32 bits",
+                  "48 bits",
+                  "64 bits",
+                  "128 bits"
+            ],
+            "a": 3,
+            "e": "IPv6 uses 128-bit addresses to provide a much larger address space."
+      },
+      {
+            "q": "What is the fixed size of the IPv6 base header?",
+            "o": [
+                  "20 bytes",
+                  "32 bytes",
+                  "40 bytes",
+                  "60 bytes"
+            ],
+            "a": 2,
+            "e": "The IPv6 base header is fixed at 40 bytes; optional information uses extension headers."
+      },
+      {
+            "q": "Which IPv4 field is used to limit a packet's lifetime?",
+            "o": [
+                  "Header checksum",
+                  "TTL",
+                  "Identification",
+                  "Fragment offset"
+            ],
+            "a": 1,
+            "e": "Time To Live (TTL) is reduced by routers and prevents packets circulating indefinitely."
+      },
+      {
+            "q": "Which protocol maps an IPv4 address to a MAC address on a local network?",
+            "o": [
+                  "RARP",
+                  "DHCP",
+                  "ARP",
+                  "ICMP"
+            ],
+            "a": 2,
+            "e": "ARP resolves a known IPv4 address to the corresponding link-layer MAC address."
+      },
+      {
+            "q": "Which protocol was designed to obtain an IP address when only the MAC address is known?",
+            "o": [
+                  "ARP",
+                  "RARP",
+                  "ICMP",
+                  "DNS"
+            ],
+            "a": 1,
+            "e": "RARP was designed to map a device's MAC address to its IPv4 address; it is now obsolete."
+      },
+      {
+            "q": "What does the letter D represent in the DHCP DORA process?",
+            "o": [
+                  "Delivery",
+                  "Discovery",
+                  "Domain",
+                  "Destination"
+            ],
+            "a": 1,
+            "e": "DORA begins with Discover, followed by Offer, Request and Acknowledgement."
+      },
+      {
+            "q": "Which UDP port is used by a DHCP server?",
+            "o": [
+                  "53",
+                  "67",
+                  "68",
+                  "80"
+            ],
+            "a": 1,
+            "e": "DHCP servers listen on UDP port 67; clients use UDP port 68."
+      },
+      {
+            "q": "Which protocol is commonly used by ping to test IP reachability?",
+            "o": [
+                  "TCP",
+                  "UDP",
+                  "ICMP",
+                  "ARP"
+            ],
+            "a": 2,
+            "e": "Ping commonly uses ICMP Echo Request and Echo Reply messages."
+      },
+      {
+            "q": "Which ICMP message is commonly generated when a packet's TTL expires?",
+            "o": [
+                  "Echo Reply",
+                  "Time Exceeded",
+                  "Address Mask Reply",
+                  "Redirect Request"
+            ],
+            "a": 1,
+            "e": "Routers send an ICMP Time Exceeded message when the IPv4 TTL reaches zero."
+      },
+      {
+            "q": "Which protocol automatically provides hosts with IP configuration such as an address and default gateway?",
+            "o": [
+                  "DHCP",
+                  "ARP",
+                  "RTP",
+                  "SMTP"
+            ],
+            "a": 0,
+            "e": "DHCP can provide an IP address, subnet mask, default gateway and DNS server information."
+      },
+      {
+            "q": "In IPv6, which device performs packet fragmentation when fragmentation is required?",
+            "o": [
+                  "Every router",
+                  "The destination router",
+                  "The source host",
+                  "The DNS server"
+            ],
+            "a": 2,
+            "e": "IPv6 routers do not fragment packets; the source host can fragment using the Fragment extension header."
+      },
+      {
+            "q": "Which layer is responsible for logical addressing and routing?",
+            "o": [
+                  "Physical",
+                  "Data Link",
+                  "Network",
+                  "Application"
+            ],
+            "a": 2,
+            "e": "The Network layer uses logical IP addresses and selects paths between networks."
+      },
+      {
+            "q": "What is the main function of a router?",
+            "o": [
+                  "Regenerate electrical signals",
+                  "Forward packets between networks",
+                  "Translate domain names",
+                  "Encrypt every packet"
+            ],
+            "a": 1,
+            "e": "A router forwards IP packets using its routing table."
+      },
+      {
+            "q": "Which notation represents a subnet mask prefix length?",
+            "o": [
+                  "MAC notation",
+                  "CIDR slash notation",
+                  "Port notation",
+                  "URL notation"
+            ],
+            "a": 1,
+            "e": "CIDR represents the network prefix using a slash, such as /24."
+      },
+      {
+            "q": "How many bits are in an IPv4 address?",
+            "o": [
+                  "8",
+                  "16",
+                  "32",
+                  "128"
+            ],
+            "a": 2,
+            "e": "IPv4 addresses contain 32 bits."
+      },
+      {
+            "q": "How many total addresses are in a /24 IPv4 block?",
+            "o": [
+                  "64",
+                  "128",
+                  "256",
+                  "512"
+            ],
+            "a": 2,
+            "e": "A /24 leaves 8 host bits, so 2^8 = 256 addresses."
+      },
+      {
+            "q": "What is the traditional usable host count in a /24 subnet?",
+            "o": [
+                  "254",
+                  "255",
+                  "256",
+                  "257"
+            ],
+            "a": 0,
+            "e": "A conventional /24 has 256 addresses; network and broadcast addresses leave 254 usable hosts."
+      },
+      {
+            "q": "Which address is used to identify a network itself in IPv4 subnetting?",
+            "o": [
+                  "First address with all host bits zero",
+                  "Last address with all host bits one",
+                  "Any multicast address",
+                  "Loopback address"
+            ],
+            "a": 0,
+            "e": "The network address has all host bits set to zero."
+      },
+      {
+            "q": "Which IPv4 address is the limited broadcast address?",
+            "o": [
+                  "0.0.0.0",
+                  "127.0.0.1",
+                  "255.255.255.255",
+                  "224.0.0.1"
+            ],
+            "a": 2,
+            "e": "255.255.255.255 is the limited broadcast address for the local network."
+      },
+      {
+            "q": "Which IPv4 range is reserved for loopback?",
+            "o": [
+                  "10.0.0.0/8",
+                  "127.0.0.0/8",
+                  "172.16.0.0/12",
+                  "192.168.0.0/16"
+            ],
+            "a": 1,
+            "e": "The 127.0.0.0/8 block is reserved for loopback testing."
+      },
+      {
+            "q": "Which field helps identify fragments belonging to the same original IPv4 datagram?",
+            "o": [
+                  "Protocol",
+                  "Identification",
+                  "Header checksum",
+                  "DSCP"
+            ],
+            "a": 1,
+            "e": "The Identification field associates fragments of one original datagram."
+      },
+      {
+            "q": "IPv4 fragment offset is measured in units of how many bytes?",
+            "o": [
+                  "1",
+                  "4",
+                  "8",
+                  "16"
+            ],
+            "a": 2,
+            "e": "The fragment offset is expressed in 8-byte units."
+      },
+      {
+            "q": "Which IPv4 flag indicates that more fragments follow?",
+            "o": [
+                  "DF",
+                  "MF",
+                  "RST",
+                  "SYN"
+            ],
+            "a": 1,
+            "e": "MF means More Fragments; it is set on all fragments except the last."
+      },
+      {
+            "q": "Where are IPv4 fragments normally reassembled?",
+            "o": [
+                  "At every router",
+                  "At the source only",
+                  "At the destination host",
+                  "At the DNS server"
+            ],
+            "a": 2,
+            "e": "The destination host reassembles the fragments."
+      },
+      {
+            "q": "What does CIDR stand for?",
+            "o": [
+                  "Classless Inter-Domain Routing",
+                  "Central Internet Data Registry",
+                  "Class Internet Datagram Routing",
+                  "Connected Internal Domain Route"
+            ],
+            "a": 0,
+            "e": "CIDR means Classless Inter-Domain Routing."
+      },
+      {
+            "q": "Which protocol maps a domain name to an IP address?",
+            "o": [
+                  "ARP",
+                  "DNS",
+                  "DHCP",
+                  "ICMP"
+            ],
+            "a": 1,
+            "e": "DNS resolves domain names to IP addresses and other records."
+      },
+      {
+            "q": "Which routing protocol is commonly used between autonomous systems on the Internet?",
+            "o": [
+                  "RIP",
+                  "OSPF",
+                  "BGP",
+                  "ARP"
+            ],
+            "a": 2,
+            "e": "BGP exchanges routing information between autonomous systems."
+      },
+      {
+            "q": "Which routing protocol is a link-state interior gateway protocol?",
+            "o": [
+                  "RIP",
+                  "OSPF",
+                  "BGP",
+                  "DHCP"
+            ],
+            "a": 1,
+            "e": "OSPF is a link-state routing protocol used within an autonomous system."
+      },
+      {
+            "q": "What is tunneling in computer networks?",
+            "o": [
+                  "Splitting a file into bytes",
+                  "Encapsulating one packet inside another packet",
+                  "Changing a MAC address",
+                  "Deleting packet headers"
+            ],
+            "a": 1,
+            "e": "Tunneling carries one protocol packet inside another packet for transport across a network."
+      },
+      {
+            "q": "Which IPv6 feature replaces broadcast communication?",
+            "o": [
+                  "Anycast only",
+                  "Multicast",
+                  "ARP broadcast",
+                  "NAT"
+            ],
+            "a": 1,
+            "e": "IPv6 uses multicast rather than broadcast."
+      },
+      {
+            "q": "Which IPv6 header field serves a role similar to IPv4 TTL?",
+            "o": [
+                  "Hop Limit",
+                  "Flow Label",
+                  "Payload Length",
+                  "Next Header"
+            ],
+            "a": 0,
+            "e": "IPv6 Hop Limit is decremented by each forwarding router."
+      },
+      {
+            "q": "Which addressing information identifies an application process at the transport layer?",
+            "o": [
+                  "MAC address",
+                  "Port number",
+                  "Subnet mask",
+                  "TTL"
+            ],
+            "a": 1,
+            "e": "Port numbers identify sending and receiving application processes."
+      },
+      {
+            "q": "What is the range of well-known TCP/UDP port numbers?",
+            "o": [
+                  "0–1023",
+                  "1024–2047",
+                  "2048–4095",
+                  "49152–65535"
+            ],
+            "a": 0,
+            "e": "Well-known ports range from 0 through 1023."
+      },
+      {
+            "q": "Which protocol is connection-oriented?",
+            "o": [
+                  "UDP",
+                  "IP",
+                  "TCP",
+                  "ICMP"
+            ],
+            "a": 2,
+            "e": "TCP establishes a connection before transferring application data."
+      },
+      {
+            "q": "Which protocol does not establish a connection before sending data?",
+            "o": [
+                  "TCP",
+                  "UDP",
+                  "FTP",
+                  "SMTP"
+            ],
+            "a": 1,
+            "e": "UDP is connectionless and sends independent datagrams."
+      },
+      {
+            "q": "What is the main purpose of multiplexing at the transport layer?",
+            "o": [
+                  "Combine data from multiple applications for transmission",
+                  "Assign IP addresses",
+                  "Choose physical routes",
+                  "Encrypt packets"
+            ],
+            "a": 0,
+            "e": "Multiplexing gathers data from multiple processes for transport using port numbers."
+      },
+      {
+            "q": "What is demultiplexing?",
+            "o": [
+                  "Breaking a frame into bits",
+                  "Delivering received data to the correct application process",
+                  "Finding a router",
+                  "Compressing packets"
+            ],
+            "a": 1,
+            "e": "The receiver uses port information to deliver data to the correct socket/process."
+      },
+      {
+            "q": "Which TCP field carries the next byte expected by the receiver?",
+            "o": [
+                  "Window size",
+                  "Acknowledgment number",
+                  "Urgent pointer",
+                  "Checksum"
+            ],
+            "a": 1,
+            "e": "The acknowledgment number indicates the next byte expected in the TCP byte stream."
+      },
+      {
+            "q": "What is the minimum TCP header size?",
+            "o": [
+                  "8 bytes",
+                  "16 bytes",
+                  "20 bytes",
+                  "40 bytes"
+            ],
+            "a": 2,
+            "e": "A TCP header without options is 20 bytes."
+      },
+      {
+            "q": "What is the maximum TCP header size?",
+            "o": [
+                  "40 bytes",
+                  "48 bytes",
+                  "60 bytes",
+                  "80 bytes"
+            ],
+            "a": 2,
+            "e": "The TCP data offset allows a maximum header length of 60 bytes."
+      },
+      {
+            "q": "Which TCP flag is used to initiate a connection?",
+            "o": [
+                  "FIN",
+                  "SYN",
+                  "RST",
+                  "PSH"
+            ],
+            "a": 1,
+            "e": "SYN synchronizes sequence numbers during connection establishment."
+      },
+      {
+            "q": "Which TCP flag is normally used to terminate a connection?",
+            "o": [
+                  "ACK",
+                  "URG",
+                  "FIN",
+                  "ECE"
+            ],
+            "a": 2,
+            "e": "FIN indicates that a sender has finished sending data."
+      },
+      {
+            "q": "Which TCP flag indicates an immediate connection reset?",
+            "o": [
+                  "RST",
+                  "SYN",
+                  "PSH",
+                  "CWR"
+            ],
+            "a": 0,
+            "e": "RST resets or aborts a TCP connection."
+      },
+      {
+            "q": "What is the purpose of TCP sequence numbers?",
+            "o": [
+                  "Identify byte positions in the stream",
+                  "Identify IP networks",
+                  "Select DNS servers",
+                  "Measure signal strength"
+            ],
+            "a": 0,
+            "e": "Sequence numbers support ordered delivery, acknowledgments and retransmissions."
+      },
+      {
+            "q": "Which TCP mechanism detects lost data and supports retransmission?",
+            "o": [
+                  "Acknowledgments and timers",
+                  "DNS caching",
+                  "ARP tables",
+                  "IP multicast"
+            ],
+            "a": 0,
+            "e": "TCP uses acknowledgments, retransmission timers and related algorithms to recover lost segments."
+      },
+      {
+            "q": "Which mechanism prevents a fast sender from overwhelming a slow receiver?",
+            "o": [
+                  "Congestion control",
+                  "Flow control",
+                  "Routing",
+                  "Fragmentation"
+            ],
+            "a": 1,
+            "e": "TCP flow control uses the advertised receive window to protect the receiver's buffer."
+      },
+      {
+            "q": "Which mechanism helps prevent too much traffic from overloading the network?",
+            "o": [
+                  "Flow control",
+                  "Congestion control",
+                  "Port addressing",
+                  "Multiplexing"
+            ],
+            "a": 1,
+            "e": "TCP congestion control adjusts the congestion window based on network conditions."
+      },
+      {
+            "q": "During TCP slow start, cwnd generally grows how?",
+            "o": [
+                  "Approximately exponentially per RTT",
+                  "Remains fixed",
+                  "Decreases to zero",
+                  "Only one byte per day"
+            ],
+            "a": 0,
+            "e": "In slow start, cwnd grows rapidly, approximately doubling each RTT under ideal ACK behavior."
+      },
+      {
+            "q": "Which TCP phase increases cwnd more cautiously after the slow-start threshold?",
+            "o": [
+                  "Congestion avoidance",
+                  "Connection release",
+                  "Name resolution",
+                  "Fragmentation"
+            ],
+            "a": 0,
+            "e": "Congestion avoidance typically increases cwnd approximately linearly."
+      },
+      {
+            "q": "Which protocol is commonly used for RPC when low overhead is desired?",
+            "o": [
+                  "UDP",
+                  "ARP",
+                  "ICMP",
+                  "HTTP only"
+            ],
+            "a": 0,
+            "e": "RPC systems may use UDP for low overhead, while implementing timeouts and retransmission as needed."
+      },
+      {
+            "q": "Which RTP field helps detect packet loss and restore packet order?",
+            "o": [
+                  "Sequence number",
+                  "Source port",
+                  "TTL",
+                  "Window size"
+            ],
+            "a": 0,
+            "e": "RTP sequence numbers help detect loss and reorder received media packets."
+      },
+      {
+            "q": "Which layer provides network services directly to user applications?",
+            "o": [
+                  "Physical",
+                  "Data Link",
+                  "Application",
+                  "Network"
+            ],
+            "a": 2,
+            "e": "The Application layer provides protocols and services used by applications."
+      },
+      {
+            "q": "Which protocol is used to transfer web pages?",
+            "o": [
+                  "HTTP",
+                  "ARP",
+                  "RARP",
+                  "ICMP"
+            ],
+            "a": 0,
+            "e": "HTTP is the application protocol used for web communication."
+      },
+      {
+            "q": "What does HTTPS add to HTTP?",
+            "o": [
+                  "IP routing",
+                  "TLS-based security",
+                  "MAC addressing",
+                  "File compression only"
+            ],
+            "a": 1,
+            "e": "HTTPS uses TLS to protect HTTP communication with encryption and authentication."
+      },
+      {
+            "q": "Which HTTP method is commonly used to retrieve a resource?",
+            "o": [
+                  "POST",
+                  "GET",
+                  "DELETE",
+                  "PATCH"
+            ],
+            "a": 1,
+            "e": "GET requests a representation of a resource from a server."
+      },
+      {
+            "q": "Which HTTP method is commonly used to submit data for processing?",
+            "o": [
+                  "GET",
+                  "TRACE",
+                  "POST",
+                  "HEAD"
+            ],
+            "a": 2,
+            "e": "POST submits data to the target resource, often to create or process information."
+      },
+      {
+            "q": "Which HTTP status code means that a resource was not found?",
+            "o": [
+                  "200",
+                  "301",
+                  "404",
+                  "500"
+            ],
+            "a": 2,
+            "e": "404 Not Found indicates that the requested resource could not be found."
+      },
+      {
+            "q": "Which HTTP status code indicates a successful request?",
+            "o": [
+                  "200",
+                  "400",
+                  "403",
+                  "503"
+            ],
+            "a": 0,
+            "e": "200 OK indicates that the request succeeded."
+      },
+      {
+            "q": "Which HTTP version uses QUIC as its transport?",
+            "o": [
+                  "HTTP/1.0",
+                  "HTTP/1.1",
+                  "HTTP/2",
+                  "HTTP/3"
+            ],
+            "a": 3,
+            "e": "HTTP/3 runs over QUIC, which uses UDP."
+      },
+      {
+            "q": "Which protocol is designed for file transfer between hosts?",
+            "o": [
+                  "FTP",
+                  "SMTP",
+                  "SNMP",
+                  "ARP"
+            ],
+            "a": 0,
+            "e": "FTP is the File Transfer Protocol."
+      },
+      {
+            "q": "Which TCP port is used by the FTP control connection by default?",
+            "o": [
+                  "20",
+                  "21",
+                  "23",
+                  "25"
+            ],
+            "a": 1,
+            "e": "FTP control commands are exchanged over TCP port 21."
+      },
+      {
+            "q": "In traditional active FTP, which port is commonly used by the server for the data connection?",
+            "o": [
+                  "20",
+                  "21",
+                  "22",
+                  "53"
+            ],
+            "a": 0,
+            "e": "In active FTP, the server typically initiates the data connection from TCP port 20."
+      },
+      {
+            "q": "Which protocol is used to send email between mail servers?",
+            "o": [
+                  "POP3",
+                  "IMAP",
+                  "SMTP",
+                  "HTTP"
+            ],
+            "a": 2,
+            "e": "SMTP is used for sending and relaying email."
+      },
+      {
+            "q": "Which protocol commonly downloads email from a mailbox to a client?",
+            "o": [
+                  "POP3",
+                  "SMTP",
+                  "DNS",
+                  "FTP"
+            ],
+            "a": 0,
+            "e": "POP3 retrieves email, commonly by downloading messages to a client."
+      },
+      {
+            "q": "Which email protocol supports synchronized access to server-side folders?",
+            "o": [
+                  "IMAP",
+                  "ARP",
+                  "RTP",
+                  "TFTP"
+            ],
+            "a": 0,
+            "e": "IMAP keeps messages and folders on the server and synchronizes client views."
+      },
+      {
+            "q": "Which port is the standard submission port for email clients using SMTP?",
+            "o": [
+                  "53",
+                  "80",
+                  "587",
+                  "110"
+            ],
+            "a": 2,
+            "e": "TCP port 587 is commonly used for authenticated message submission."
+      },
+      {
+            "q": "Which protocol translates host names into IP addresses?",
+            "o": [
+                  "DNS",
+                  "DHCP",
+                  "FTP",
+                  "TELNET"
+            ],
+            "a": 0,
+            "e": "DNS resolves names such as example.com into IP addresses."
+      },
+      {
+            "q": "Which DNS server holds authoritative records for a domain?",
+            "o": [
+                  "Authoritative name server",
+                  "DHCP client",
+                  "Web proxy",
+                  "Local switch"
+            ],
+            "a": 0,
+            "e": "An authoritative name server provides definitive DNS records for its zone."
+      },
+      {
+            "q": "Which transport protocol and port are commonly used for DNS queries?",
+            "o": [
+                  "TCP 80",
+                  "UDP 53",
+                  "UDP 67",
+                  "TCP 23"
+            ],
+            "a": 1,
+            "e": "DNS commonly uses UDP port 53 for standard queries; TCP 53 is also used in cases such as zone transfers."
+      },
+      {
+            "q": "Which protocol provides remote terminal access but sends data in plaintext by default?",
+            "o": [
+                  "SSH",
+                  "TELNET",
+                  "HTTPS",
+                  "SFTP"
+            ],
+            "a": 1,
+            "e": "TELNET provides remote terminal access over TCP port 23 without encryption by default."
+      },
+      {
+            "q": "Which secure protocol is commonly used instead of TELNET?",
+            "o": [
+                  "SSH",
+                  "RARP",
+                  "POP3",
+                  "TFTP"
+            ],
+            "a": 0,
+            "e": "SSH provides encrypted remote login and command execution."
+      },
+      {
+            "q": "Which device primarily operates at the Data Link layer?",
+            "o": [
+                  "Router",
+                  "Switch",
+                  "Gateway firewall only",
+                  "DNS server"
+            ],
+            "a": 1,
+            "e": "A traditional Ethernet switch forwards frames using MAC addresses at Layer 2."
+      },
+      {
+            "q": "Which address is generally used for delivery within a local Ethernet network?",
+            "o": [
+                  "IP address",
+                  "MAC address",
+                  "Port number",
+                  "URL"
+            ],
+            "a": 1,
+            "e": "Ethernet frames use MAC addresses for local-link delivery."
+      },
+      {
+            "q": "What is encapsulation?",
+            "o": [
+                  "Adding protocol headers as data moves down the layers",
+                  "Removing all packet headers",
+                  "Assigning a domain name",
+                  "Increasing bandwidth"
+            ],
+            "a": 0,
+            "e": "Each protocol layer adds its own control information around the data."
+      },
+      {
+            "q": "Which protocol data unit is associated with the Transport layer?",
+            "o": [
+                  "Frame",
+                  "Packet",
+                  "Segment or datagram",
+                  "Bit"
+            ],
+            "a": 2,
+            "e": "TCP data is commonly called a segment; UDP data is called a datagram."
+      },
+      {
+            "q": "Which protocol data unit is associated with the Network layer?",
+            "o": [
+                  "Packet",
+                  "Frame",
+                  "Bit",
+                  "Message only"
+            ],
+            "a": 0,
+            "e": "The Network layer handles packets, often called IP datagrams."
+      },
+      {
+            "q": "Which protocol data unit is associated with the Data Link layer?",
+            "o": [
+                  "Segment",
+                  "Frame",
+                  "Packet",
+                  "Port"
+            ],
+            "a": 1,
+            "e": "The Data Link layer packages network-layer packets into frames."
+      },
+      {
+            "q": "What does MTU stand for?",
+            "o": [
+                  "Maximum Transmission Unit",
+                  "Minimum Transfer Utility",
+                  "Main Transport Unit",
+                  "Maximum TCP Usage"
+            ],
+            "a": 0,
+            "e": "MTU is the maximum packet or payload size a link can carry at the network layer, depending on the link technology."
+      },
+      {
+            "q": "Which IPv4 field indicates the upper-layer protocol carried in the payload?",
+            "o": [
+                  "Protocol",
+                  "TTL",
+                  "IHL",
+                  "Identification"
+            ],
+            "a": 0,
+            "e": "The IPv4 Protocol field identifies the encapsulated protocol, such as TCP or UDP."
+      },
+      {
+            "q": "Which IPv6 field identifies the type of header that follows?",
+            "o": [
+                  "Next Header",
+                  "Hop Limit",
+                  "Flow Label",
+                  "Payload Length"
+            ],
+            "a": 0,
+            "e": "Next Header identifies the following extension header or upper-layer protocol."
+      },
+      {
+            "q": "Which IPv4 address is private?",
+            "o": [
+                  "8.8.8.8",
+                  "1.1.1.1",
+                  "192.168.1.10",
+                  "203.0.113.9"
+            ],
+            "a": 2,
+            "e": "192.168.0.0/16 is one of the private IPv4 address ranges."
+      },
+      {
+            "q": "Which address is a valid IPv4 multicast address?",
+            "o": [
+                  "192.168.1.1",
+                  "224.0.0.5",
+                  "127.0.0.1",
+                  "10.0.0.1"
+            ],
+            "a": 1,
+            "e": "IPv4 multicast addresses belong to 224.0.0.0 through 239.255.255.255."
+      },
+      {
+            "q": "What is the main purpose of a default gateway?",
+            "o": [
+                  "Resolve MAC addresses on all networks",
+                  "Forward traffic to destinations outside the local subnet",
+                  "Assign application ports",
+                  "Store web pages"
+            ],
+            "a": 1,
+            "e": "A host sends off-subnet traffic to its configured default gateway."
+      },
+      {
+            "q": "Which service dynamically leases IP addresses to hosts?",
+            "o": [
+                  "DNS",
+                  "DHCP",
+                  "SMTP",
+                  "RTP"
+            ],
+            "a": 1,
+            "e": "DHCP dynamically assigns addresses and other network configuration."
+      },
+      {
+            "q": "What is the first message in the DHCP DORA sequence?",
+            "o": [
+                  "Offer",
+                  "Request",
+                  "Discover",
+                  "ACK"
+            ],
+            "a": 2,
+            "e": "The client starts the DHCP process by broadcasting DHCP Discover."
+      },
+      {
+            "q": "Which DNS record type commonly stores an IPv4 address?",
+            "o": [
+                  "AAAA",
+                  "MX",
+                  "A",
+                  "PTR"
+            ],
+            "a": 2,
+            "e": "An A record maps a domain name to an IPv4 address."
+      },
+      {
+            "q": "Which DNS record type commonly stores an IPv6 address?",
+            "o": [
+                  "A",
+                  "AAAA",
+                  "MX",
+                  "NS"
+            ],
+            "a": 1,
+            "e": "An AAAA record maps a domain name to an IPv6 address."
+      },
+      {
+            "q": "Which protocol is used to transfer files securely over SSH?",
+            "o": [
+                  "FTPS",
+                  "SFTP",
+                  "TFTP",
+                  "Plain FTP"
+            ],
+            "a": 1,
+            "e": "SFTP is the SSH File Transfer Protocol and is distinct from FTP."
+      },
+      {
+            "q": "Which protocol is used to monitor and manage network devices?",
+            "o": [
+                  "SNMP",
+                  "SMTP",
+                  "RTP",
+                  "ARP"
+            ],
+            "a": 0,
+            "e": "SNMP supports monitoring and management of network devices."
+      },
+      {
+            "q": "Which email component stores and forwards outgoing messages?",
+            "o": [
+                  "Mail transfer agent",
+                  "ARP cache",
+                  "Routing table",
+                  "DHCP relay"
+            ],
+            "a": 0,
+            "e": "A mail transfer agent transfers email between mail servers using SMTP."
+      },
+      {
+            "q": "What is the primary purpose of a URL?",
+            "o": [
+                  "Identify the location of a resource",
+                  "Assign an IP address",
+                  "Encrypt an Ethernet frame",
+                  "Control TCP congestion"
+            ],
+            "a": 0,
+            "e": "A URL identifies a resource and describes how it can be accessed."
+      }
+];
+
+    const questionsEl = document.getElementById('questions');
+    const form = document.getElementById('quizForm');
+    const answeredCount = document.getElementById('answeredCount');
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
+    const resultCard = document.getElementById('resultCard');
+    const submitBtn = document.getElementById('submitBtn');
+    let submitted = false;
+
+    function renderQuestions() {
+      questionsEl.innerHTML = quizData.map((item, index) => `
+        <section class="question-card" id="question-${index}">
+          <div class="q-meta">
+            <span class="q-number">QUESTION ${String(index + 1).padStart(2, '0')}</span>
+            <span class="mark">1 Mark</span>
+          </div>
+          <h2>${item.q}</h2>
+          <div class="options">
+            ${item.o.map((option, optionIndex) => `
+              <label class="option" data-option="${optionIndex}">
+                <input type="radio" name="q${index}" value="${optionIndex}" />
+                <span><strong>${String.fromCharCode(65 + optionIndex)}.</strong> ${option}</span>
+              </label>
+            `).join('')}
+          </div>
+          <div class="feedback" id="feedback-${index}"></div>
+        </section>
+      `).join('');
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const count = quizData.filter((_, i) => form.querySelector(`input[name="q${i}"]:checked`)).length;
+      const percent = Math.round((count / quizData.length) * 100);
+      answeredCount.textContent = `${count} / ${quizData.length}`;
+      progressFill.style.width = `${percent}%`;
+      progressText.textContent = `${percent}% completed`;
+    }
+
+    function submitQuiz(event) {
+      event.preventDefault();
+      if (submitted) return;
+      const unanswered = quizData.filter((_, i) => !form.querySelector(`input[name="q${i}"]:checked`)).length;
+      if (unanswered > 0) {
+        const proceed = confirm(`You have ${unanswered} unanswered question(s). Submit anyway?`);
+        if (!proceed) return;
+      }
+      submitted = true;
+      let score = 0;
+      const review = [];
+      quizData.forEach((item, index) => {
+        const selected = form.querySelector(`input[name="q${index}"]:checked`);
+        const selectedValue = selected ? Number(selected.value) : -1;
+        const correct = selectedValue === item.a;
+        if (correct) score++;
+        const card = document.getElementById(`question-${index}`);
+        card.querySelectorAll('input').forEach(input => input.disabled = true);
+        card.querySelectorAll('.option').forEach((label, optionIndex) => {
+          if (optionIndex === item.a) label.classList.add('correct');
+          if (optionIndex === selectedValue && !correct) label.classList.add('wrong');
+        });
+        const feedback = document.getElementById(`feedback-${index}`);
+        feedback.className = `feedback show ${correct ? 'good' : 'bad'}`;
+        feedback.textContent = `${correct ? 'Correct.' : 'Not quite.'} ${item.e}`;
+        review.push({ index, correct, selectedValue, item });
+      });
+      document.getElementById('scoreText').textContent = `${score} / ${quizData.length}`;
+      const percent = Math.round((score / quizData.length) * 100);
+      document.getElementById('resultNote').textContent = `${percent}% • ${score >= 80 ? 'Excellent work!' : score >= 60 ? 'Good effort. Review the explanations and try again.' : 'Keep practising. Review the explanations and try again.'}`;
+      resultCard.classList.add('show');
+      submitBtn.disabled = true;
+      document.getElementById('reviewList').innerHTML = review.map(({ index, correct, selectedValue, item }) => `
+        <div class="review-item">
+          <strong>${index + 1}. ${item.q}</strong>
+          <span>Your answer: ${selectedValue < 0 ? 'Not answered' : item.o[selectedValue]}</span><br />
+          <span>Correct answer: ${item.o[item.a]}</span><br />
+          <span style="color:${correct ? 'var(--good)' : 'var(--bad)'}">${correct ? '1 mark' : '0 marks'}</span>
+        </div>
+      `).join('');
+      resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function resetQuiz() {
+      submitted = false;
+      form.reset();
+      submitBtn.disabled = false;
+      resultCard.classList.remove('show');
+      document.getElementById('reviewList').classList.add('hidden');
+      document.getElementById('reviewBtn').textContent = 'Review Answers';
+      renderQuestions();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    questionsEl.addEventListener('change', updateProgress);
+    form.addEventListener('submit', submitQuiz);
+    document.getElementById('resetBtn').addEventListener('click', resetQuiz);
+    document.getElementById('retryBtn').addEventListener('click', resetQuiz);
+    document.getElementById('reviewBtn').addEventListener('click', () => {
+      const list = document.getElementById('reviewList');
+      const button = document.getElementById('reviewBtn');
+      list.classList.toggle('hidden');
+      button.textContent = list.classList.contains('hidden') ? 'Review Answers' : 'Hide Review';
+    });
+
+    renderQuestions();
+  </script>
+</body>
+</html>
